@@ -19,11 +19,6 @@ concepts behind the shell program include process, system call, bit manipulation
 Shell is a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). </br>
 This program was written entirely in C Language.
 </p>
-
-## COPYRIGHT
-Copyright (C) 2022 by [**Reny Kipkoech**](https://github.com/Tr-reny) and [**Stellah Mbao**](https://github.com/StellahMbao) </br>
-All rights reserved
-
  ## Description :
 This is a shell written in [C](https://en.wikipedia.org/wiki/C_(programming_language)).
 It is based on [the Thompson Shell](https://en.wikipedia.org/wiki/Thompson_shell).

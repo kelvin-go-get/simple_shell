@@ -1,74 +1,75 @@
 #include "shell.h"
 
 /**
- * interactive - returns true if shell is interactive mode
- * @info: struct address
- *
- * Return: 1 if interactive mode, 0 otherwise
+ * _comint - if the shell enters the collaborative mode, returns true
+ * @noti: struct address
+ * Return: if in collaborative mode, 1 or 0, otherwise
+ * Authors: Kelvin and Bismark
  */
-int interactive(info_t *info)
+int _comint(info_t *noti)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && noti->readfd <= 2);
 }
 
 /**
- * is_delim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
- * Return: 1 if true, 0 if false
+ * _delimeter - function to check if the character is a delimeter
+ * @ch: the character expected to be checked
+ * @strdlm: the string with the delimeter
+ * Return: if false, 0 and if true, 1
  */
-int is_delim(char c, char *delim)
+int _delimeter(char ch, char *strdlm)
 {
-	while (*delim)
-		if (*delim++ == c)
+	while (*strdlm)
+		if (*strdlm++ == ch)
 			return (1);
 	return (0);
 }
 
 /**
- *_isalpha - checks for alphabetic character
- *@c: The character to input
- *Return: 1 if c is alphabetic, 0 otherwise
+ * _Alph - check to see if an the character is alphabetic character
+ * @ch: expected character to be inputted
+ * Return: if character is an alphabet, 1 and 0, otherwise
  */
 
-int _isalpha(int c)
+int _Alph(int ch)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
 		return (1);
 	else
 		return (0);
 }
 
 /**
- *_atoi - converts a string to an integer
- *@s: the string to be converted
- *Return: 0 if no numbers in string, converted number otherwise
+ *_atoi - this function converts strings to integers
+ *@str: expected string to be converted into integers
+ *Return: 0 if no numeral in string, the integer gotten otherwise
  */
 
-int _atoi(char *s)
+int _atoi(char *str)
 {
-	int i, sign = 1, flag = 0, output;
-	unsigned int result = 0;
+	unsigned int rst = 0;
+	int prf = 1, ind, opt, flg = 0;
 
-	for (i = 0;  s[i] != '\0' && flag != 2; i++)
+	for (ind = 0;  flg != 2 && str[ind] != '\0'; ind++)
 	{
-		if (s[i] == '-')
-			sign *= -1;
+		if (str[ind] == '-')
+			prf *= -1;
 
-		if (s[i] >= '0' && s[i] <= '9')
+		if (str[ind] <= '9' && str[ind] >= '0')
 		{
-			flag = 1;
-			result *= 10;
-			result += (s[i] - '0');
+			flg = 1;
+			rst = rst * 10;
+			rst += (str[ind] - '0');
 		}
-		else if (flag == 1)
-			flag = 2;
+		else if (flg == 1)
+			flg = 2;
 	}
 
-	if (sign == -1)
-		output = -result;
+	if (prf == -1)
+		opt = -rst;
 	else
-		output = result;
+		opt = rst;
 
-	return (output);
+	return (opt);
 }
+

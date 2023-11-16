@@ -1,62 +1,65 @@
 #include "shell.h"
 
 /**
- **_memset - fills memory with a constant byte
- *@s: the pointer to the memory area
- *@b: the byte to fill *s with
- *@n: the amount of bytes to be filled
- *Return: (s) a pointer to the memory area s
+ *_balmem - setting a memory with a constant byte
+ *@ptr: memory area's pointer
+ *@bt: the value to fill the memory with
+ *@amnt: the number of bytes to fill the memory with
+ *Return: the memory area's pointer, ptr
  */
-char *_memset(char *s, char b, unsigned int n)
+char *_balmem(char *ptr, char bt, unsigned int amnt)
 {
-	unsigned int i;
+	unsigned int index;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+	for (index = 0; index < amnt; index++)
+		ptr[index] = bt;
+	return (ptr);
 }
 
 /**
- * ffree - frees a string of strings
- * @pp: string of strings
+ * set_fr - sets strings free
+ * @strr: character type
  */
-void ffree(char **pp)
+void set_fr(char **strr)
 {
-	char **a = pp;
+	char **x = strr;
 
-	if (!pp)
+	if (!strr)
 		return;
-	while (*pp)
-		free(*pp++);
-	free(a);
+	while (*strr)
+		free(*strr++);
+	free(x);
 }
 
 /**
- * _realloc - reallocates a block of memory
- * @ptr: pointer to previous malloc'ated block
- * @old_size: byte size of previous block
- * @new_size: byte size of new block
+ * r_alc - function to reallocate memory
+ * @p: previously allocated memory's pointer
+ * @msz: previous byte
+ * @rsz: new byte
  *
- * Return: pointer to da ol'block nameen.
+ * Return: previously allocated memory's pointer
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *r_alc(void *p, unsigned int msz, unsigned int rsz)
 {
-	char *p;
+	char *ptr;
 
-	if (!ptr)
-		return (malloc(new_size));
-	if (!new_size)
-		return (free(ptr), NULL);
-	if (new_size == old_size)
-		return (ptr);
-
-	p = malloc(new_size);
 	if (!p)
+		return (malloc(rsz));
+	if (!rsz)
+		return (free(p), NULL);
+	if (msz == rsz)
+		return (p);
+
+	ptr = malloc(rsz);
+	if (!ptr)
 		return (NULL);
 
-	old_size = old_size < new_size ? old_size : new_size;
-	while (old_size--)
-		p[old_size] = ((char *)ptr)[old_size];
-	free(ptr);
-	return (p);
+	msz = msz < rsz ? msz : rsz;
+	while (msz--)
+		ptr[msz] = ((char *)p)[msz];
+	free(p);
+	return (ptr);
 }
+
+
+
